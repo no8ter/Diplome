@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+{% block topper %}
+{% endblock topper %}
+{% block body %}
+<style>
+    input,
+    input[type=submit] {
+        width: 200px;
+        height: 20px;
+        border-radius: 4px;
+        margin: 5px;
+        font-size: medium;
+        font-family: Arial, Helvetica, sans-serif;
+        border-color: lightgray;
+        background-color: white;
+    }
+
+    input[type=submit] {
+        width: 208px;
+        height: 30px;
+    }
+
+    input[type=submit]:hover,
+    input[type=submit]:focus {
+        background-color: palegreen;
+        border-color: yellowgreen;
+    }
+
+    input:focus {
+        border-radius: 4px;
+        outline-style: none;
+    }
+
+    .login_form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        font-size: medium;
+        margin-top: 20%;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+    }
+</style>
+<form class='login_form' action="" method="post">
+    <label for="username">Имя пользователя</label>
+    <input type="text" name="username" autocomplete="off" required>
+    <label for="password">Пароль</label>
+    <input type="password" name="password" autocomplete="off" required>
+    <input type="submit" value="Войти">
+</form>
+{% if error %}
+<div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Ошибка!</strong> Логин или пароль введены не правильно.
+</div>
+{% else %}
+<div style='padding: 30px;position: absolute;'></div>
+{% endif %}
+
+
+{% endblock body %}

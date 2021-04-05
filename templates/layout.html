@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Приёмная комиссия</title>
+    <style>
+        body {
+            margin: 0px;
+            font-family: "LouvreSerif,Georgia,Times New Roman,serif";
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+        }
+
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+            top: 10%;
+            border-radius: 5px;
+        }
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .closebtn:hover {
+            color: black;
+        }
+
+        .topper {
+            position: sticky;
+            top: -1px;
+            padding-top: 1px;
+            background-color: #dd3333;
+        }
+
+        div.topper_head {
+            font: 400 16px/1.56 Roboto, Open Sans, Arial, Helvetica, sans-serif;
+            padding: 24px 32px;
+            height: calc(1em * 1.71 + 64px);
+            display: flex;
+            flex-wrap: wrap;
+            position: relative;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .menu_button_toggle {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            border: 0;
+            margin: 0;
+            padding: 0;
+            width: auto;
+            overflow: visible;
+            background: transparent;
+            font: inherit;
+            text-align: inherit;
+            text-transform: inherit;
+            appearance: none;
+        }
+
+        span.menu_span {
+            margin-left: 8px;
+            text-decoration-color: transparent;
+            color: white;
+        }
+
+        span.menu_span:hover {
+            text-decoration: underline;
+            transition: all 0.5s ease;
+        }
+
+        svg.svgr-icons {
+            font-size: 2em;
+            fill: white;
+        }
+
+        ul.bottom_menu {
+            white-space: nowrap;
+            display: -webkit-flex;
+            display: flex;
+
+            list-style-type: none;
+            margin: 0;
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+            padding: 0 var(--body-padding);
+
+            list-style: none;
+        }
+
+        nav.topper_bottom {
+            line-height: 28.26px;
+            letter-spacing: 1.6px;
+            font-size: 18px;
+            contain: layout paint;
+            box-sizing: border-box;
+
+            font: 18px Montserrat, Verdana, sans-serif;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+
+            border-top: 1px solid black;
+
+        }
+
+        div.menu_bottom {
+            overflow-x: scroll;
+            scrollbar-width: none;
+            letter-spacing: 1.6px;
+            position: relative;
+            justify-content: center;
+            display: flex;
+        }
+
+        a.topper_menu {
+            transition: color .3s;
+            padding: 16px 16px;
+        }
+
+        a {
+            text-decoration: white;
+            color: white;
+        }
+
+        a.title {
+            font: 25px/1.33 Montserrat, Verdana, sans-serif;
+            letter-spacing: 1.6px;
+            position: relative;
+            height: 100%;
+            display: table;
+            white-space: normal;
+        }
+
+        li {
+            white-space: nowrap;
+            display: flex;
+        }
+
+        div.title_menu {
+            display: flex;
+            -webkit-align-items: center;
+            align-items: center;
+            height: 100%;
+            margin-left: 30.8%;
+        }
+
+        a.topper_menu:hover {
+            text-decoration: underline;
+            transition: all 0.5s ease;
+        }
+
+        div.authorization_menu {
+            margin-left: auto;
+            display: flex;
+
+            -webkit-align-items: center;
+            align-items: center;
+            height: 100%;
+            /* display: none; */
+        }
+
+        button.menu_button_login,
+        button.menu_button_reg {
+            border: none;
+            background-color: #dd3333;
+            cursor: pointer;
+            color: white;
+            font: 400 16px/1.56 Roboto, Open Sans, Arial, Helvetica, sans-serif
+        }
+
+        button.menu_button_login:hover,
+        button.menu_button_reg:hover {
+            text-decoration: underline;
+        }
+
+        @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
+        (min-resolution: 2dppx) {
+            a.topper_menu {
+                font-size: 2.7vw;
+                padding: 10px 10px;
+            }
+
+            div.title_menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% block topper %}
+    <header class="topper">
+        <div class="topper_head">
+            <nav role="navigation">
+                <button class="menu_button_toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="1em" height="1em"
+                        focusable="false" aria-hidden="true" class="svgr-icons">
+                        <path
+                            d="M20.5 9a5.5 5.5 0 014.4 8.8l4.63 4.67-1.06 1.06-4.63-4.66A5.5 5.5 0 1120.5 9zM16 21v1.5H2V21h14zm4.5-10.5a4 4 0 100 8 4 4 0 000-8zm-7.94 5V17H2v-1.5h10.56zM14.2 10v1.5H2V10h12.19z">
+                        </path>
+                    </svg>
+                    <span class="menu_span">Меню</span>
+                </button>
+            </nav>
+            <div class="title_menu">
+                <a href="/" class="title">
+                    Рязанский политехнический колледж
+                </a>
+            </div>
+            <div class="authorization_menu">
+                <button class="menu_button_login" onclick="window.location.href='/cabinet'">
+                    <span>Войти</span>
+                </button>
+                <button class="menu_button_reg">
+                    <span>Регистрация</span>
+                </button>
+            </div>
+        </div>
+        <nav class="topper_bottom" role="navigation">
+            <div class="menu_bottom">
+                <ul class="bottom_menu">
+                    <li>
+                        <a href="/claim" class="topper_menu" id='claim'>
+                            <span>Записаться</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/ratings" class="topper_menu" id='ratings'>
+                            <span>Рейтинги</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/professions" class="topper_menu" id='professions'>
+                            <span>Направления</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    {% endblock topper %}
+
+    {% block body %}
+
+    {% endblock body %}
+</body>
+<script async>
+    if (window.location.href.includes('ratings')) {
+        var elem = document.getElementById('ratings');
+        elem.style.color = 'lightgreen';
+    } else {
+        var elem = document.getElementById('ratings');
+        elem.style.color = 'white';
+    }
+    if (window.location.href.includes('professions')) {
+        var elem = document.getElementById('professions');
+        elem.style.color = 'lightgreen';
+    } else {
+        var elem = document.getElementById('professions');
+        elem.style.color = 'white';
+    }
+    if (window.location.href.includes('claim')) {
+        var elem = document.getElementById('claim');
+        elem.style.color = 'lightgreen';
+    } else {
+        var elem = document.getElementById('claim');
+        elem.style.color = 'white';
+    }
+</script>
+
+</html>

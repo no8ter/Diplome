@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block body %}
+<style>
+    div.index_body {
+        display: flex;
+        flex: 1 1;
+        flex-direction: column;
+        justify-content: center;
+    }
+    div.index_main_column{
+        display: flex;
+        padding-left: 15%;
+        padding-right: 15%;
+        /* align-items: center; */
+        justify-content: center;
+    }
+    p.index {
+        align-self: center;
+    }
+</style>
+<div class="index_body">
+    <div class="index_main_column">
+        <p class="index">NOTHING</p>
+    </div>
+</div>
+    
+{% endblock body %}

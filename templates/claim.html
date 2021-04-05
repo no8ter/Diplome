@@ -1,0 +1,355 @@
+{% extends 'layout.html' %}
+{% block body %}
+<style>
+    div.main_form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    form {
+        display: flex;
+        justify-content: center;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 1fr 1fr;
+        border: 0.5px solid black;
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    div.content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 25%;
+        padding-right: 25%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+
+    div.form_namedata {
+        display: grid;
+        width: auto;
+        grid-template-columns: 49% 49%;
+        grid-gap: 1vw;
+    }
+
+    input,
+    input[type=date],
+    select {
+        margin: 2px;
+        margin-right: 5px;
+        width: 98%;
+        border: 1px solid gray;
+        border-radius: 0px;
+    }
+
+    input[type=submit] {
+        width: auto;
+        margin: 5px;
+        height: 40px;
+        border: 0.5px solid black;
+        border-radius: 5px;
+    }
+
+    label.formLabel {
+        width: 150px;
+        padding: 5px;
+    }
+
+    div.grid_line {
+        display: grid;
+        grid-template-columns: 30% 70%;
+    }
+
+    select {
+        width: 100%;
+        margin: 2px;
+        margin-right: 3px;
+    }
+
+    .mar1 {
+        margin: 1px;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        opacity: 1;
+    }
+
+    input[type=number][name=schoolAttestate] {
+        -moz-appearance: textfield;
+    }
+
+    input[type=number][name=schoolAttestate]::-webkit-inner-spin-button,
+    input[type=number][name=schoolAttestate]::-webkit-outer-spin-button {
+        opacity: 0;
+    }
+
+    input[type=checkbox] {
+        width: auto;
+    }
+
+    .line_main {
+        display: flex;
+        flex-direction: row;
+        margin-top: 1px;
+        margin-bottom: 1px;
+    }
+
+    div.mid_grid>p {
+        margin: 10px;
+    }
+
+    @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
+    (min-resolution: 2dppx) {
+        div.form_namedata {
+            display: grid;
+            width: 100%;
+            grid-template-columns: 100%;
+            grid-gap: 1vw;
+        }
+
+        input[type=submit] {
+            font-size: larger;
+            background-color: lightgreen;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        div.content {
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-top: 2%;
+            padding-bottom: 5%;
+        }
+
+        div.form_namedata>label {
+            text-align: right;
+        }
+
+        div.line_main {
+            display: grid;
+            grid-template-columns: 50% 50%;
+        }
+
+        div.grid_line {
+            display: grid;
+            grid-template-columns: 50% 50%;
+        }
+
+        a.topper_menu {
+            font-size: 3vw;
+            font-weight: 700;
+        }
+
+        form {
+            border: 0px;
+        }
+    }
+
+    div.signs {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: space-between;
+        grid-column: auto / span 2;
+        margin: 5px;
+    }
+
+    div.signs > label {
+        padding: 5px;
+        width: max-content;
+    }
+
+    div.signs > input[type=checkbox] {
+        margin: 0px;
+        padding: 0px;
+    }
+    div.signs > label > a {
+        color: green;
+        text-decoration: green;
+    }
+</style>
+<div class="content">
+    <!-- ERROR -->
+    {% if error %}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Ошибка!</strong> {{ error }}.
+    </div>
+    {% else %}
+    <div style='padding: 30px;position: absolute;'></div>
+    {% endif %}
+    <!-- /ERROR -->
+    <div class='main_form'>
+        <form action="" method="post">
+            
+            <p style="text-align: center; margin: 1px; font-size: xx-large; font-weight: bold;">Заявление</p>
+            <div class='form_namedata'>
+                <!-- Left -->
+                <div class="grid_line">
+                    <label for="secondname" class='formLabel'>Фамилия:</label>
+                    <input type="text" name="secondname" autocomplete="off" required placeholder="Иванов" pattern="[А-Я][а-я]*">
+                </div>
+                <div class="grid_line">
+                    <label for="firstname" class='formLabel'>Имя:</label>
+                    <input type="text" name="firstname" autocomplete="off" required placeholder="Иван" pattern="[А-Я][а-я]*">
+                </div>
+                <div class="grid_line">
+                    <label for="tridname" class='formLabel'>Отчество:</label>
+                    <input type="text" name="tridname" autocomplete="off" placeholder="Иванович" pattern="[А-Я][а-я]*">
+                </div>
+                <div class="grid_line">
+                    <label for="birthday" class='formLabel'>Дата рождения:</label>
+                    <input type="date" name="birthday" autocomplete="off" required>
+                </div>
+                <div class="grid_line">
+                    <label for="birthplace" class='formLabel'>Место рождения:</label>
+                    <input type="text" name="birthplace" autocomplete="off" required placeholder='г. Рязань'>
+                </div>
+                <!-- Right -->
+                <div class="grid_line">
+                    <label for="country" class='formLabel'>Гражданство:</label>
+                    <input type="text" name="country" autocomplete="off" required placeholder="Российская Федерация">
+                </div>
+                <div class="grid_line">
+                    <label for="passport" class='formLabel'>Документ:</label>
+                    <select>
+                        <option value="passport" name="passport">Паспорт</option>
+                    </select>
+                </div>
+                <div class="grid_line">
+                    <label for="passID" class='formLabel'>Серия и номер:</label>
+                    <input type="text" name="passID" autocomplete="off" placeholder="6116999999" required pattern="(\d{10})">
+                </div>
+                <div class="grid_line">
+                    <label for="passDate" class='formLabel'>Когда выдан:</label>
+                    <input type="date" name="passDate" autocomplete="off" required>
+                </div>
+                <div class="grid_line">
+                    <label for="passCountry" class='formLabel'>Кем выдан:</label>
+                    <input type="text" name="passCountry" autocomplete="off" required placeholder="Отделением №2 отдела УФМС России по Рязанской обл. в г. Рязани">
+                </div>
+            </div>
+            <hr style="width: 99%;">
+            <div class="mid_grid">
+                
+                <!-- Spec -->
+                <div class="line_main">
+                    <label for="speciality" class='formLabel'>На специальность:</label>
+                    <select name="specialitySelect" id="spec1">
+                        {% for spec in species %}
+                        <option value="{{ spec[0] }}">{{ spec[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!-- School -->
+                <p>Окончил(а) учебное заведение:</p>
+                <div class='line_main'>
+                    <label for="schoolName" class='formLabel'>Название:</label>
+                    <input type="text" name="schoolName" autocomplete="off" required placeholder="МБОУ СОШ Школа №15">
+                </div>
+                <div class='line_main'>
+                    <label for="schoolDate" class='formLabel'>Год окончания:</label>
+                    <input id='pickDate' type="number" min="1900" step="1" name="schoolDate" autocomplete="off"
+                        required />
+
+                </div>
+                <div class='line_main'>
+                    <label for="schoolAttestate" class='formLabel'>Номер аттестата:</label>
+                    <input type="text" name="schoolAttestate" autocomplete="off" required placeholder="06224003199119" pattern="[0-9]{14}">
+                </div>
+                <!-- About me -->
+                <p>О себе:</p>
+                <div class='line_main'>
+                    <label for="passLivePlace" class='formLabel'>Прописан(а):</label>
+                    <input type="text" name="passLivePlace" autocomplete="off" required placeholder="ул. Ленина д.6 к.1 кв.47" />
+                </div>
+                <div class='line_main'>
+                    <label for="currentLivePlace" class='formLabel'>Проживаю:</label>
+                    <input type="text" name="currentLivePlace" autocomplete="off" required placeholder="ул. Ленина д.6 к.1 кв.47" />
+                </div>
+                <div class='line_main'>
+                    <label for="phoneNumber" class='formLabel'>Номер телефона:</label>
+                    <input type="tel" name="phoneNumber" autocomplete="off" required placeholder="+79991234567" pattern="\+7(\d{10})">
+                </div>
+                <div class='line_main'>
+                    <label for="сommissariat" class='formLabel'>Районный коммисариат:</label>
+                    <input type="text" name="сommissariat" autocomplete="off" placeholder="Военный комиссариат Октябрьского и Советского районов Рязанской области">
+                </div>
+                <div class='line_main'>
+                    <label for="secondLanguage" class='formLabel'>Иностранный язык:</label>
+                    <select name="secondLanguage">
+                        <option value="english">Английский язык</option>
+                        <option value="french">Французкий язык</option>
+                        <option value="german">Немецкий язык</option>
+                    </select>
+                    <!-- <input type="text" name="secondLanguage" autocomplete="off"> -->
+                </div>
+                <div class='line_main'>
+                    <label for="medicalGroup" class='formLabel'>Группа по здорвью:</label>
+                    <select name="medicalGroup">
+                        <option value="main">Основная группа</option>
+                        <option value="prepare">Подготовительная группа</option>
+                        <option value="specA">Специальная А</option>
+                        <option value="specB">Специальная Б</option>
+                    </select>
+                    <!-- <input type="text" name="medicalGroup" autocomplete="off"> -->
+                </div>
+                <div class='line_main'>
+                    <label for="needHostel" class='formLabel'>Потребность в общежитии:</label>
+                    <select name="needHostelSelect">
+                        <option value="False">Не нуждаюсь</option>
+                        <option value="True">Нуждаюсь</option>
+                    </select>
+                    <!-- <input type="text" name="needHostel" autocomplete="off"> -->
+                </div>
+                <!-- Parents -->
+                <p>О родителях:</p>
+                <div class='line_main'>
+                    <label for="motherName" class='formLabel'>Фио матери:</label>
+                    <input type="text" name="motherName" autocomplete="off" placeholder="Иванова Инна Ивановна">
+                </div>
+                <div class='line_main'>
+                    <label for="motherPhone" class='formLabel'>Телефон матери:</label>
+                    <input type="tel" name="motherPhone" autocomplete="off" placeholder="+79991234567" pattern="\+7(\d{10})">
+                </div>
+                <div class='line_main'>
+                    <label for="fatherName" class='formLabel'>Фио отца:</label>
+                    <input type="text" name="fatherName" autocomplete="off" placeholder="Иванов Иван Иванович">
+                </div>
+                <div class='line_main'>
+                    <label for="fatherPhone" class='formLabel'>Телефон отца:</label>
+                    <input type="tel" name="fatherPhone" autocomplete="off" placeholder="+79991234567" pattern="\+7(\d{10})">
+                </div>
+                <!-- Signs -->
+                <div class='signs'>
+                    <label for="specEducationFirstTime">Среднее профессиональное образование
+                        получаю впервые</label>
+                    <input type="checkbox" name="specEducationFirstTime" value="True" required>
+                </div>
+                <div class='signs'>
+                    <label for="specLicense">С <a href="http://polytech-rzn.ru/metal/wp-content/uploads/2021/02/%D0%A3%D1%81%D1%82%D0%B0%D0%B2-1.pdf">копиями устава</a>, <a href="http://polytech-rzn.ru/metal/wp-content/uploads/2021/01/4.-%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F-%D0%9E%D0%93%D0%91%D0%9F%D0%9E%D0%A3-%D0%A0%D0%9F%D0%A2%D0%9A.pdf">лицензии на ведение образовательной деятельности</a>, <a href="http://polytech-rzn.ru/metal/wp-content/uploads/2021/01/8.-%D0%A1%D0%B2%D0%B8%D0%B4%D0%B5%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%BE-%D0%BE-%D0%B3%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9-%D0%B0%D0%BA%D0%BA%D1%80%D0%B5%D0%B4%D0%B8%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%9E%D0%93%D0%91%D0%9F%D0%9E%D0%A3-%D0%A0%D0%9F%D0%A2%D0%9A.pdf">свидетельством о государственной аккредетации</a> и приложениями к нему ознакомлен(а)</label>
+                    <input type="checkbox" name="specLicense" value="True" required>
+                </div>
+                <div class='signs'>
+                    <label for="specOriginalDocs">С <a href="http://polytech-rzn.ru/metal/wp-content/uploads/2014/07/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0-%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%D0%B0.pdf">датой предоставления оригинала документов об образовании</a> ознакомлен(а)</label>
+                    <input type="checkbox" name="specOriginalDocs" value="True" required>
+                </div>
+                <div class='signs'>
+                    <label for="specPersonalData">Согласен на обраоботку своих персональных данных в порядке ФЗ №152-ФЗ</label>
+                    <input type="checkbox" name="specPersonalData" value="True" required>
+                </div>
+            </div>
+            <input type="submit" value="Отправить заявление">
+        </form>
+    </div>
+</div>
+<script onload="document.body">
+    var inp = document.getElementById('pickDate')
+    inp.max = (new Date()).getFullYear();
+    inp.value = inp.max;
+</script>
+
+{% endblock body %}

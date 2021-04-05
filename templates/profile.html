@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block topper %}
+<div class="topper">
+    <button class='menu_button' onclick="window.location.href='/'">Главная</button>
+    <button class='menu_button' onclick="">Абитуриенты</button>
+    <button class='menu_button' onclick="">Специальности</button>
+    <button class='menu_button' onclick="">Рейтинги</button>
+    <button class='menu_button' onclick="window.location.href='/logout'">Выход из @{{ username }}</button>
+</div>
+{% endblock topper %}
+{% block body %}
+    PROFILE
+{% endblock body %}
