@@ -48,11 +48,12 @@ sql = '''
         `name` text not null,
         `spec_data` text
         `info` text,
+        `legend` text,
         `photoWay` text
     );
 
     Insert or ignore into `users`(`login`,`password`,`firstName`,`statement`,`info`) values(
-        'admin', 'admin', 'Administrator', '1', 'main user'
+        'admin', 'admin', 'Administrator', 'Администратор', 'default'
     );
 
 

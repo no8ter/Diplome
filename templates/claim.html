@@ -34,6 +34,13 @@
         grid-gap: 1vw;
     }
 
+    input:required:valid {
+        border: 1px solid green;
+    }
+    input:required:invalid {
+        border: 1px solid lightcoral;
+    }
+
     input,
     input[type=date],
     select {
@@ -49,7 +56,14 @@
         margin: 5px;
         height: 40px;
         border: 0.5px solid black;
+        background-color: white;
+        transition-duration: .5s;
         border-radius: 5px;
+    }
+
+    input[type=submit]:hover {
+        background-color: lightgreen;
+        transition-duration: .5s;
     }
 
     label.formLabel {

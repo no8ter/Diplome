@@ -23,5 +23,28 @@
         <p class="index">NOTHING</p>
     </div>
 </div>
+<script async>
+    if (window.location.href.includes('ratings')) {
+        var elem = document.getElementById('ratings');
+        elem.style.color = 'lightgreen';
+    } else {
+        var elem = document.getElementById('ratings');
+        elem.style.color = 'white';
+    }
+    if (window.location.href.includes('professions')) {
+        var elem = document.getElementById('professions');
+        elem.style.color = 'lightgreen';
+    } else {
+        var elem = document.getElementById('professions');
+        elem.style.color = 'white';
+    }
+    if (window.location.href.includes('claim')) {
+        var elem = document.getElementById('claim');
+        elem.style.color = 'lightgreen';
+    } else {
+        var elem = document.getElementById('claim');
+        elem.style.color = 'white';
+    }
+</script>
     
 {% endblock body %}

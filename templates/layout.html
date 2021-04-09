@@ -7,14 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>Приёмная комиссия</title>
+
     <style>
         body {
             margin: 0px;
-            font-family: "LouvreSerif,Georgia,Times New Roman,serif";
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-content: center;
             justify-content: center;
+            overflow-y: scroll;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
         }
 
         .alert {
@@ -57,6 +63,7 @@
             position: relative;
             align-items: center;
             box-sizing: border-box;
+            justify-content: space-between;
         }
 
         .menu_button_toggle {
@@ -107,6 +114,11 @@
             list-style: none;
         }
 
+        div.topper_head>nav,
+        div.topper_head>div.authorization_menu {
+            width: 170px;
+        }
+
         nav.topper_bottom {
             line-height: 28.26px;
             letter-spacing: 1.6px;
@@ -123,7 +135,6 @@
         }
 
         div.menu_bottom {
-            overflow-x: scroll;
             scrollbar-width: none;
             letter-spacing: 1.6px;
             position: relative;
@@ -160,7 +171,6 @@
             -webkit-align-items: center;
             align-items: center;
             height: 100%;
-            margin-left: 30.8%;
         }
 
         a.topper_menu:hover {
@@ -169,13 +179,12 @@
         }
 
         div.authorization_menu {
-            margin-left: auto;
             display: flex;
 
             -webkit-align-items: center;
             align-items: center;
+            justify-content: end;
             height: 100%;
-            /* display: none; */
         }
 
         button.menu_button_login,
@@ -192,15 +201,31 @@
             text-decoration: underline;
         }
 
+        div.error {
+            display: flex;
+            margin: 30%;
+            margin-top: 10%;
+            justify-content: center;
+            align-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: xx-large;
+        }
+
         @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
         (min-resolution: 2dppx) {
             a.topper_menu {
-                font-size: 2.7vw;
+                font-size: 3vw;
+                font-weight: 700;
                 padding: 10px 10px;
             }
 
             div.title_menu {
                 display: none;
+            }
+
+            div.topper_head{
+                width: 100%;
+                padding: 10px;
             }
         }
     </style>
@@ -211,7 +236,7 @@
     <header class="topper">
         <div class="topper_head">
             <nav role="navigation">
-                <button class="menu_button_toggle">
+                <button class="menu_button_toggle" onclick="window.location.href='/'">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="1em" height="1em"
                         focusable="false" aria-hidden="true" class="svgr-icons">
                         <path
@@ -226,14 +251,16 @@
                     Рязанский политехнический колледж
                 </a>
             </div>
+            {% block topper_auth %}
             <div class="authorization_menu">
-                <button class="menu_button_login" onclick="window.location.href='/cabinet'">
+                <button class="menu_button_login" onclick="window.location.href='/login'">
                     <span>Войти</span>
                 </button>
                 <button class="menu_button_reg">
                     <span>Регистрация</span>
                 </button>
             </div>
+            {% endblock topper_auth %}
         </div>
         <nav class="topper_bottom" role="navigation">
             <div class="menu_bottom">
@@ -260,10 +287,12 @@
     {% endblock topper %}
 
     {% block body %}
-
+        <div class="error">
+            Такая страница не существует ;(
+        </div>
     {% endblock body %}
-</body>
-<script async>
+
+<script onload="document.body">
     if (window.location.href.includes('ratings')) {
         var elem = document.getElementById('ratings');
         elem.style.color = 'lightgreen';
@@ -286,5 +315,5 @@
         elem.style.color = 'white';
     }
 </script>
-
+</body>
 </html>

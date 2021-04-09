@@ -1,0 +1,117 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<style>
+    div.prof_body {
+        display: flex;
+        flex: 1 1;
+        flex-direction: column;
+        justify-content: center;
+        margin: 20%;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+
+    div.prof_main_column {
+        display: flex;
+        flex-direction: column;
+        padding-left: 15%;
+        padding-right: 15%;
+        justify-content: center;
+    }
+
+    button.prof {
+        margin: 10px;
+        border: 2px solid lightgreen;
+        border-radius: 7px;
+        background-color: white;
+        padding: 15px;
+        transition: .5s;
+        font-size: 11pt;
+    }
+
+    button.prof:hover {
+        border: 2px solid black;
+        background-color: lightgreen;
+        transition: .5s;
+    }
+
+    p.prof {
+        align-self: center;
+    }
+
+    span.title {
+        text-align: center;
+        font-size: 2.8vh;
+        font-weight: 700;
+    }
+
+    img {
+        height: 270px;
+        width: 300px;
+    }
+
+    div.prof_topper {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    span.info {
+        font-size: small;
+    }
+
+    div.prof_info {
+        display: block;
+        word-wrap: break-word;
+        overflow-wrap: normal;
+        word-break: normal;
+        line-break: auto;
+        hyphens: manual;
+        width: 100%;
+    }
+
+    div.prof_info > ul > li {
+        white-space: initial;
+    }
+
+    @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
+    (min-resolution: 2dppx) {
+        div.prof_body {
+            margin: 1%;
+        }
+
+        div.prof_main_column {
+            padding-left: 3%;
+            padding-right: 3%;
+        }
+
+        div.prof_topper {
+            flex-direction: column;
+        }
+        img {
+            width: 100%;
+        }
+    }
+</style>
+<div class="prof_body">
+    <div class="prof_main_column">
+        <div class='prof_topper'>
+            <span class='title'>
+                {{ info[1] }}
+                <br>
+                {{ info[2] }}
+            </span>
+            {% if info[5] %}
+                <img src="{{ url_for('static', filename=info[5]) }}" alt="factory">
+            {% else %}
+                <img src="{{ url_for('static', filename='factory-standart.svg') }}" alt="factory" style="border: 1px solid black;border-radius: 10px;">
+            {% endif %}
+        </div>
+        <div class='prof_info'>
+            {% include info[1]+'.html' %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock body %}

@@ -1,13 +1,185 @@
 {% extends 'layout.html' %}
-{% block topper %}
-<div class="topper">
-    <button class='menu_button' onclick="window.location.href='/'">Главная</button>
-    <button class='menu_button' onclick="">Абитуриенты</button>
-    <button class='menu_button' onclick="">Специальности</button>
-    <button class='menu_button' onclick="">Рейтинги</button>
-    <button class='menu_button' onclick="window.location.href='/logout'">Выход из @{{ username }}</button>
+{% block topper_auth %}
+
+<div class="authorization_menu">
+    <button class="menu_button_login" onclick="window.location.href='/logout'">
+        <span>Выйти из @{{ username }}</span>
+    </button>
 </div>
-{% endblock topper %}
+
+{% endblock topper_auth %}
 {% block body %}
-    PROFILE
+<style>
+    div.index_body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 25%;
+        padding-right: 25%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+
+    div.profile {
+        margin-left: 20%;
+        margin-right: 20%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    div.main_info {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        align-content: center;
+        justify-content: center;
+    }
+
+    img#photo {
+        width: 270px;
+        height: 270px;
+    }
+
+    button#upload_photo {
+        background-color: white;
+        border: 0px;
+        outline: none;
+    }
+
+    div.user_info {
+        font-size: larger;
+        display: flex;
+        flex-direction: column;
+        margin-left: 3%;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    input.userData,
+    input.userData:focus,
+    input.userData[type=date] {
+        font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', 'Arial', sans-serif;
+        width: 400px;
+        border: 0px;
+        border-bottom: 1px solid black;
+        border-radius: 0px;
+        padding: 10px;
+        margin: 5px;
+        outline: none;
+    }
+
+    input.userData[type=date]>span>span {
+        padding: 1px 0px;
+    }
+
+    div.grid_line {
+        width: min-content;
+        width: -moz-min-content;
+    }
+
+    div.other_info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
+    (min-resolution: 2dppx) {
+        div.profile {
+            margin-left: 5%;
+            margin-right: 5%;
+            margin-top: 5%;
+        }
+
+        div.main_info {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        div.main_info>img#photo {
+            width: 60%;
+            height: 60%;
+        }
+
+        div.user_info {
+            font-size: medium;
+            margin-left: 10px;
+        }
+
+        input.userData,
+        input.userData:focus,
+        input.userData[type=date] {
+            width: 180px;
+        }
+    }
+
+    .password {
+        position: relative;
+    }
+
+    .password-control {
+        position: absolute;
+        top: 11px;
+        right: 6px;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: url("{{ url_for('static', filename='view.svg') }}") 0 0 no-repeat;
+    }
+</style>
+
+
+<div class='content'>
+    <div class='profile'>
+        <form action="" method="POST">
+            <div class='main_info'>
+                <!-- ADD PHOTO UPLOAD -->
+                <button id='upload_photo' onclick="console.log('Click')">
+                    <img id="photo" src="{{ url_for('static', filename='user.png') }}" alt="user icon">
+                </button>
+                <div class='user_info'>
+                    <div class="grid_line">
+                        <input class="userData" type="text" name="secondname" autocomplete="off" placeholder="Фамилия"
+                            pattern="[А-Я][а-я]*" value="{{ userFN }}">
+                    </div>
+                    <div class="grid_line">
+                        <input class="userData" type="text" name="firstname" autocomplete="off" placeholder="Имя"
+                            pattern="[А-Я][а-я]*" value="{{ userSN }}">
+                    </div>
+                    <div class="grid_line">
+                        <input class="userData" type="text" name="tridname" autocomplete="off" placeholder="Отчество"
+                            pattern="[А-Я][а-я]*" value="{{ userTN.strip() }}">
+                    </div>
+                    <div class="grid_line">
+                        <input class="userData" type="date" name="birthday" autocomplete="off"" 
+                    value="{{ userAge }}">
+                    </div>
+                    <div class="grid_line">
+                        <input class="userData" type="text" name="login" autocomplete="off" placeholder="Логин"
+                            value="{{ userLogin }}">
+                    </div>
+                    <div class='password'>
+                        <input class="userData" id='passField' type="password" name="password" autocomplete="off" placeholder="Пароль"
+                            value="{{ userPassword }}">
+                        <a href="#" class="password-control" onclick="changePassField()"></a>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class='other_info'>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function changePassField(){
+        pass = document.getElementById('passField')
+        if (pass.getAttribute('type') == 'password') {
+            pass.setAttribute('type', 'text')
+        } else {
+            pass.setAttribute('type', 'password')
+        }
+    }
+</script>
 {% endblock body %}

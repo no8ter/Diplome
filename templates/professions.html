@@ -6,20 +6,57 @@
         flex: 1 1;
         flex-direction: column;
         justify-content: center;
+        margin: 20%;
+        margin-top: 1%;
+        margin-bottom: 1%;
     }
-    div.prof_main_column{
+
+    div.prof_main_column {
         display: flex;
+        flex-direction: column;
         padding-left: 15%;
         padding-right: 15%;
-        /* align-items: center; */
         justify-content: center;
     }
+
+    button.prof {
+        margin: 10px;
+        border: 2px solid lightgreen;
+        border-radius: 7px;
+        background-color: white;
+        padding: 15px;
+        transition: .5s;
+        font-size: 11pt;
+    }
+
+    button.prof:hover {
+        border: 2px solid black;
+        background-color: lightgreen;
+        transition: .5s;
+    }
+
     p.prof {
         align-self: center;
+    }
+
+    @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
+    (min-resolution: 2dppx) {
+        div.prof_body {
+            margin: 1%;
+        }
+
+        div.prof_main_column {
+            padding-left: 3%;
+            padding-right: 3%;
+        }
     }
 </style>
 <div class="prof_body">
     <div class="prof_main_column">
+        {% for prof in profs %}
+        <button class='prof' onclick="window.location.href='/professions/{{ prof[0] }}'">{{ prof[1] }} {{ prof[2]
+            }}</button>
+        {% endfor %}
     </div>
 </div>
 {% endblock body %}
