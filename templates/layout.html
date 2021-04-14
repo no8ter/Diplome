@@ -17,6 +17,22 @@
             align-content: center;
             justify-content: center;
             overflow-y: scroll;
+            transition: .5s;
+        }
+
+        button {
+            padding: 5px;
+            background-color: white;
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 20px;
+            font-size: large;
+            transition: 0.3s;
+        }
+    
+        button:hover {
+            background-color: lightgreen;
+            transition: .3s;
         }
 
         ::-webkit-scrollbar {
@@ -40,7 +56,7 @@
             font-size: 22px;
             line-height: 20px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: .3s;
         }
 
         .closebtn:hover {
@@ -83,10 +99,15 @@
             appearance: none;
         }
 
+        .menu_button_toggle:hover {
+            background-color: #dd3333;
+        }
+
         span.menu_span {
             margin-left: 8px;
             text-decoration-color: transparent;
             color: white;
+            transition: all 0.5s ease;
         }
 
         span.menu_span:hover {
@@ -253,12 +274,18 @@
             </div>
             {% block topper_auth %}
             <div class="authorization_menu">
+                {% if session.get('userName') %}
+                <button class="menu_button_login" onclick="window.location.href='/logout'">
+                    <span>Выйти из @{{ session.get('userName') }}</span>
+                </button>
+                {% else %}
                 <button class="menu_button_login" onclick="window.location.href='/login'">
                     <span>Войти</span>
                 </button>
                 <button class="menu_button_reg">
                     <span>Регистрация</span>
                 </button>
+                {% endif %}
             </div>
             {% endblock topper_auth %}
         </div>

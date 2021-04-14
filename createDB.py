@@ -7,31 +7,31 @@ sql = '''
     Create table if not exists `users`(
         `login` text not null primary key,
         `password` text not null,
-        `firstName` text,
-        `secondName` text,
-        `thridName` text,
-        `birthday` text,
-        `birthplace` text,
-        `country` text,
-        `passID` text,
-        `passDate` text,
-        `passCountry` text,
-        `schoolName` text,  
-        `schoolDate` text,
-        `schoolAttestate` text,
-        `passportLivePlace` text,
-        `currentLivePlace` text,
-        `phoneNumber` text,
-        `commissariat` text,
-        `secondLanguage` text,
-        `medicalGroup` text,
+        `firstName` text DEFAULT " " NOT NULL,
+        `secondName` text DEFAULT " " NOT NULL,
+        `thridName` text DEFAULT " " NOT NULL,
+        `birthday` text DEFAULT " " NOT NULL,
+        `birthplace` text DEFAULT " " NOT NULL,
+        `country` text DEFAULT " " NOT NULL,
+        `passID` text DEFAULT " " NOT NULL,
+        `passDate` text DEFAULT " " NOT NULL,
+        `passCountry` text DEFAULT " " NOT NULL,
+        `schoolName` text DEFAULT " " NOT NULL,
+        `schoolDate` text DEFAULT " " NOT NULL,
+        `schoolAttestate` text DEFAULT " " NOT NULL,
+        `passportLivePlace` text DEFAULT " " NOT NULL,
+        `currentLivePlace` text DEFAULT " " NOT NULL,
+        `phoneNumber` text DEFAULT " " NOT NULL,
+        `commissariat` text DEFAULT " " NOT NULL,
+        `secondLanguage` text DEFAULT " " NOT NULL,
+        `medicalGroup` text DEFAULT " " NOT NULL,
         `needHostelSelect` bool,
-        `motherName` text,
-        `motherPhone` text,
-        `fatherName` text,
-        `fatherPhone` text,
-        `statement` text,
-        `info` text
+        `motherName` text DEFAULT " " NOT NULL,
+        `motherPhone` text DEFAULT " " NOT NULL,
+        `fatherName` text DEFAULT " " NOT NULL,
+        `fatherPhone` text DEFAULT " " NOT NULL,
+        `statement` text DEFAULT " " NOT NULL,
+        `info` text DEFAULT " " NOT NULL
     );
 
     Create table if not exists `claims`(
@@ -50,6 +50,11 @@ sql = '''
         `info` text,
         `legend` text,
         `photoWay` text
+    );
+
+    CREATE TABLE IF NOT EXISTS `settings`(
+        `property` text PRIMARY KEY,
+        `value` text DEFAULT "False"
     );
 
     Insert or ignore into `users`(`login`,`password`,`firstName`,`statement`,`info`) values(

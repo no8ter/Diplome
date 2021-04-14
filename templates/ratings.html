@@ -1,4 +1,31 @@
 {% extends 'layout.html' %}
 {% block body %}
-    
+    {% if ratings %}
+        <style>
+            div.empty {
+                display: flex;
+                flex-direction: column;
+                padding-left: 30%;
+                padding-right: 30%;
+                margin-top: 15%;
+            }
+
+            @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
+            (min-resolution: 2dppx) {
+                div.empty {
+                    padding: 1%;
+                    margin-top: 50%;
+                }
+            }
+            div.empty > span {
+                text-align: center;
+                font-size: x-large;
+            }
+        </style>
+        <div class='empty'>
+            <span>Рейтинги специальностей пока недоступны</span>
+        </div>
+    {% else %}
+        2
+    {% endif %}
 {% endblock body %}

@@ -1,6 +1,50 @@
 {% extends 'layout.html' %}
 {% block body %}
-    Вы успешно подали заявление на 
-    <button onclick="window.location.href='/cabinet'">Открыть профиль</button>
-    <button>На главную</button>
+<style>
+    div.content {
+        margin: 10%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    span.message {
+        text-align: center;
+        font-size: x-large;
+        margin-bottom: 20px;
+    }
+
+    button.control {
+        font-size: large;
+        border: 1px solid black;
+        border-radius: 7px;
+        background-color: white;
+        width: 50%;
+        margin: 10px;
+        padding: 5px;
+    }
+
+    img#mark {
+        margin: 50px;
+        width: 150px;
+    }
+
+    @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
+    (min-resolution: 2dppx) {
+        img#mark {
+            width: 40%;
+        }
+    }
+</style>
+<div class="content">
+    <img src="{{ url_for('static', filename='mark.png') }}" alt="mark" id='mark'>
+    <span class='message'>Вы успешно подали заявление на специальность {{ prof }}</span>
+    <button onclick="window.location.href='/cabinet';" class='control'>Открыть профиль</button>
+    <button onclick="window.location.href='/';" class='control'>На главную</button>
+</div>
+
+
 {% endblock body %}

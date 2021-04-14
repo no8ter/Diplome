@@ -10,7 +10,7 @@ import string
 
 
 app = Flask(__name__)
-app.debug = True
+# app.debug = True
 
 # database
 '''
@@ -156,6 +156,9 @@ def data_convert(dt: str):
     bd = dt.split('-')
     return f'{bd[2]}.{bd[1]}.{bd[0]}'
 
+def setting(name) -> bool:
+    db = sqlite3.connect('database.db')
+    return bool(_c(db.execute(f'select value from settings where property like "{name}";'))[0][0])
 # /utilities
 
 
@@ -213,7 +216,8 @@ def claim():
             session['userName'] = temp[0][1]
             session['userState'] = temp[0][2]
             session['userInfo'] = temp[0][3]
-            return redirect(url_for('claim_success'))
+            profName = cur.execute(f"Select `spec_id` from `profs` where rowid = '{request.form.get('specialitySelect')}';")[0][0]
+            return redirect(url_for('claim_success', profs=profName))
         else:
             return render_template('claim.html', error=check, species=species)
     else:
@@ -223,6 +227,7 @@ def claim():
 @app.route('/claim_success')
 def claim_success():
     if auth_request():
+    # if True:
         return render_template('claim_success.html')
     else:
         return redirect(url_for('login'))
@@ -246,7 +251,9 @@ def profile():
 
 @app.route('/ratings')
 def ratings():
-    return render_template('ratings.html')
+    rating = setting('ratings')
+
+    return render_template('ratings.html', ratings=rating)
 
 
 @app.route('/professions/')

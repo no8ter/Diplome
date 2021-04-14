@@ -9,8 +9,12 @@
         justify-content: center;
         margin: 20%;
         margin-top: 1%;
-        margin-bottom: 1%;
+        margin-bottom: 3%;
     }
+
+    div.prof_info > p > strong > a {
+        color: black;
+    } 
 
     div.prof_main_column {
         display: flex;
@@ -74,6 +78,11 @@
         white-space: initial;
     }
 
+    span.more > a {
+        color: green;
+        text-decoration: underline;
+    }
+
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
     (min-resolution: 2dppx) {
         div.prof_body {
@@ -104,12 +113,14 @@
             {% if info[5] %}
                 <img src="{{ url_for('static', filename=info[5]) }}" alt="factory">
             {% else %}
-                <img src="{{ url_for('static', filename='factory-standart.svg') }}" alt="factory" style="border: 1px solid black;border-radius: 10px;">
+                <img src="{{ url_for('static', filename='13704_o_l_1x.png') }}" alt="factory">
             {% endif %}
         </div>
         <div class='prof_info'>
             {% include info[1]+'.html' %}
+            <span class='more'>Подробнее на сайте <a href="http://polytech-rzn.ru/?page_id=17">РПТК</a></span>
         </div>
+        <button>Записаться</button>
 
     </div>
 </div>

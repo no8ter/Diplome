@@ -58,6 +58,7 @@
     input.userData:focus,
     input.userData[type=date] {
         font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', 'Arial', sans-serif;
+        font-size: medium;
         width: 400px;
         border: 0px;
         border-bottom: 1px solid black;
@@ -81,6 +82,35 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    .password {
+        position: relative;
+    }
+
+    .password-control {
+        position: absolute;
+        top: 11px;
+        right: 6px;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: url("{{ url_for('static', filename='view.svg') }}") 0 0 no-repeat;
+    }
+
+    input.save {
+        padding: 5px;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 20px;
+        font-size: large;
+        transition: 0.3s;
+    }
+
+    input.save:hover {
+        background-color: lightgreen;
+        transition: .3s;
     }
 
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
@@ -112,20 +142,6 @@
             width: 180px;
         }
     }
-
-    .password {
-        position: relative;
-    }
-
-    .password-control {
-        position: absolute;
-        top: 11px;
-        right: 6px;
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        background: url("{{ url_for('static', filename='view.svg') }}") 0 0 no-repeat;
-    }
 </style>
 
 
@@ -134,9 +150,9 @@
         <form action="" method="POST">
             <div class='main_info'>
                 <!-- ADD PHOTO UPLOAD -->
-                <button id='upload_photo' onclick="console.log('Click')">
+                <!-- <button id='upload_photo' onclick="console.log('Click')"> -->
                     <img id="photo" src="{{ url_for('static', filename='user.png') }}" alt="user icon">
-                </button>
+                <!-- </button> -->
                 <div class='user_info'>
                     <div class="grid_line">
                         <input class="userData" type="text" name="secondname" autocomplete="off" placeholder="Фамилия"
@@ -168,6 +184,7 @@
                 </div>
             </div>
             <div class='other_info'>
+                <input type='submit' class='save' value="Сохранить">
             </div>
         </form>
     </div>
