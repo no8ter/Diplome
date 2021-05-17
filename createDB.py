@@ -1,66 +1,74 @@
 from sqlite3 import connect
 
 db = connect('database.db')
-cur = db.cursor()
+c = db.cursor()
 
-sql = '''
-    Create table if not exists `users`(
-        `login` text not null primary key,
-        `password` text not null,
-        `firstName` text DEFAULT " " NOT NULL,
-        `secondName` text DEFAULT " " NOT NULL,
-        `thridName` text DEFAULT " " NOT NULL,
-        `birthday` text DEFAULT " " NOT NULL,
-        `birthplace` text DEFAULT " " NOT NULL,
-        `country` text DEFAULT " " NOT NULL,
-        `passID` text DEFAULT " " NOT NULL,
-        `passDate` text DEFAULT " " NOT NULL,
-        `passCountry` text DEFAULT " " NOT NULL,
-        `schoolName` text DEFAULT " " NOT NULL,
-        `schoolDate` text DEFAULT " " NOT NULL,
-        `schoolAttestate` text DEFAULT " " NOT NULL,
-        `passportLivePlace` text DEFAULT " " NOT NULL,
-        `currentLivePlace` text DEFAULT " " NOT NULL,
-        `phoneNumber` text DEFAULT " " NOT NULL,
-        `commissariat` text DEFAULT " " NOT NULL,
-        `secondLanguage` text DEFAULT " " NOT NULL,
-        `medicalGroup` text DEFAULT " " NOT NULL,
-        `needHostelSelect` bool,
-        `motherName` text DEFAULT " " NOT NULL,
-        `motherPhone` text DEFAULT " " NOT NULL,
-        `fatherName` text DEFAULT " " NOT NULL,
-        `fatherPhone` text DEFAULT " " NOT NULL,
-        `statement` text DEFAULT " " NOT NULL,
-        `info` text DEFAULT " " NOT NULL
-    );
 
-    Create table if not exists `claims`(
-        `userID` int not null,
-        `specialID` int not null,
-        `specEducationFirstTime` bool,
-        `specLicense` bool,
-        `specOriginalDocs` bool,
-        `specPersonalData` bool
-    );
+sql = """
 
-    Create table if not exists `profs`(
-        `spec_id` text not null primary key,
-        `name` text not null,
-        `spec_data` text
-        `info` text,
-        `legend` text,
-        `photoWay` text
-    );
+CREATE TABLE profs ( 
+	spec_id              text     ,
+	name                 text     ,
+	spec_data            text     ,
+	legend               text     ,
+	photoWay             text     ,
+	CONSTRAINT Unq_profs_spec_id UNIQUE ( spec_id ) 
+ );
 
-    CREATE TABLE IF NOT EXISTS `settings`(
-        `property` text PRIMARY KEY,
-        `value` text DEFAULT "False"
-    );
+CREATE TABLE users ( 
+	id                   integer NOT NULL  PRIMARY KEY autoincrement ,
+	login                text     ,
+	password             text     ,
+	email				 text     ,
+	rules                text NOT NULL DEFAULT 'Абитуриент'   
+ );
 
-    Insert or ignore into `users`(`login`,`password`,`firstName`,`statement`,`info`) values(
-        'admin', 'admin', 'Administrator', 'Администратор', 'default'
-    );
+CREATE TABLE abiturients ( 
+	id                   integer NOT NULL  PRIMARY KEY autoincrement ,
+	userID               integer     ,
+	fname                varchar(100) NOT NULL    ,
+	sname                varchar(100) NOT NULL    ,
+	tname                varchar(100)     ,
+	birthday             date NOT NULL    ,
+	birthplace           text     ,
+	country              text     ,
+	FOREIGN KEY ( userID ) REFERENCES users( id ) ON DELETE CASCADE ON UPDATE CASCADE
+ );
 
+CREATE TABLE claims ( 
+	id                   integer NOT NULL  PRIMARY KEY autoincrement ,
+	abitID               integer NOT NULL    ,
+	spec_id              text NOT NULL    ,
+	schoolName           text NOT NULL    ,
+	endDate              date NOT NULL    ,
+	attestate            text NOT NULL    ,
+	passPlace            text NOT NULL    ,
+	livePlace            text     ,
+	phone                text NOT NULL    ,
+	army                 text  DEFAULT 'none'   ,
+	lang                 text NOT NULL    ,
+	healthGroup          text NOT NULL    ,
+	needHostel           boolean NOT NULL    ,
+	motherName           text     ,
+	motherPhone          text     ,
+	fatherName           text     ,
+	fatherPhone          text     ,
+	consents             boolean NOT NULL DEFAULT True   ,
+	marksAverage 		 float not null default 2.0     ,
+	FOREIGN KEY ( spec_id ) REFERENCES profs( spec_id ) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY ( abitID ) REFERENCES abiturients( id ) ON DELETE CASCADE ON UPDATE CASCADE
+ );
+
+CREATE TABLE passports ( 
+	id                   integer NOT NULL  PRIMARY KEY autoincrement ,
+	abitID               integer NOT NULL    ,
+	serial               integer NOT NULL    ,
+	number               integer NOT NULL    ,
+	date                 date NOT NULL    ,
+	creator              text NOT NULL    ,
+	FOREIGN KEY ( abitID ) REFERENCES abiturients( id ) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT unq UNIQUE (serial, number)
+ );
 
 
     Insert or ignore into `profs` (`spec_id`, `name`, `spec_data`) values(
@@ -104,15 +112,10 @@ sql = '''
         '46.02.01', 'Документационное обеспечение управления и архивоведение', ''
     );
 
-'''
+"""
 
-Draft = '''
+c.executescript(sql)
 
-Create table `logs`(
-        `login` text not null,
-        `time` text
-    );
-
-'''
-cur.executescript(sql)
 db.commit()
+db.close()
+exit()

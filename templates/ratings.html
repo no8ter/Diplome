@@ -1,31 +1,118 @@
 {% extends 'layout.html' %}
 {% block body %}
-    {% if ratings %}
-        <style>
-            div.empty {
-                display: flex;
-                flex-direction: column;
-                padding-left: 30%;
-                padding-right: 30%;
-                margin-top: 15%;
+{% if ratings %}
+    <style>
+        div.mainholder {
+            margin-top: 3vw;
+            margin-bottom: 3vw;
+        }
+        
+        div.grid {
+            display: flex;
+            flex-direction: column;
+            margin-left: 25%;
+            margin-right: 25%;
+            margin-top: 3vw;
+            border: solid 1px black;
+            border-radius: 8px;
+        }
+
+        span.specname {
+            text-align: center;
+            font-size: large;
+            margin: 5px;
+        }
+
+        hr.specname {
+            width: 85%;
+            margin: 5px;
+            align-self: center;
+            transform: scaleY(0.5);
+        }
+
+        div.cell {
+            display: flex;
+            flex-direction: column;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        div.inner_cell{
+            display: flex;
+            flex-direction: row;
+        }
+
+        @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
+        (min-resolution: 2dppx) {
+            div.specholder {
+                padding: 1%;
+                margin-top: 5%;
             }
 
-            @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
-            (min-resolution: 2dppx) {
-                div.empty {
-                    padding: 1%;
-                    margin-top: 50%;
-                }
+            div.grid {
+                margin: 3%;
             }
-            div.empty > span {
-                text-align: center;
-                font-size: x-large;
+
+            hr.specname {
+                color: white;
             }
-        </style>
-        <div class='empty'>
-            <span>Рейтинги специальностей пока недоступны</span>
+        }
+    </style>
+    <div class="mainholder">
+    {% for spec in species.keys() %}
+        <div class="grid">
+            <span class="specname">{{ spec }}</span>
+            <hr class="specname">
+
+            {% for abit in species[spec] %}
+                <div class="cell">
+                    <div class="inner_cell">
+                        <span>{{ loop.index }}.&nbsp;</span>
+                        <span>{{ abit['name'] }}</span>
+                        <span style="margin-left: auto;">{{ abit['avg'] }}</span>
+                    </div>
+                    <hr class="specname" style="color: lightgray; width: 100%;">
+                </div>
+            {% endfor %}
+
         </div>
-    {% else %}
-        2
-    {% endif %}
+
+
+
+        <!-- <div class="gridholder">
+            
+            <div class="specholder">
+                
+            </div>
+        </div> -->
+    
+    {% endfor %}
+    </div>
+{% else %}
+    <style>
+        div.empty {
+            display: flex;
+            flex-direction: column;
+            padding-left: 30%;
+            padding-right: 30%;
+            margin-top: 15%;
+        }
+
+        @media only screen and (min-device-width: 375px) and (max-device-width: 667px),
+        (min-resolution: 2dppx) {
+            div.empty {
+                padding: 1%;
+                margin-top: 50%;
+            }
+        }
+
+        div.empty>span {
+            text-align: center;
+            font-size: x-large;
+        }
+    </style>
+    <div class='empty'>
+        <span>Рейтинги специальностей пока недоступны</span>
+    </div>
+{% endif %}
 {% endblock body %}

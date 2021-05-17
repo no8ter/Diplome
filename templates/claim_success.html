@@ -14,7 +14,7 @@
     span.message {
         text-align: center;
         font-size: x-large;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     button.control {
@@ -25,6 +25,10 @@
         width: 50%;
         margin: 10px;
         padding: 5px;
+        transition: .3s;
+    }
+    button.control:hover {
+        background-color: lightgreen;
     }
 
     img#mark {
@@ -41,7 +45,10 @@
 </style>
 <div class="content">
     <img src="{{ url_for('static', filename='mark.png') }}" alt="mark" id='mark'>
-    <span class='message'>Вы успешно подали заявление на специальность {{ prof }}</span>
+    <span class='message'>Вы успешно подали заявление на специальность:</span>
+    <span class='message'>{{ prof }}</span>
+    <span class='message'>Ваш логин: {{ login }}</span>
+    <span class='message'>Ваш пароль: {{ pas }}</span>
     <button onclick="window.location.href='/cabinet';" class='control'>Открыть профиль</button>
     <button onclick="window.location.href='/';" class='control'>На главную</button>
 </div>

@@ -175,8 +175,8 @@
                             value="{{ userLogin }}">
                     </div>
                     <div class='password'>
-                        <input class="userData" id='passField' type="password" name="password" autocomplete="off" placeholder="Пароль"
-                            value="{{ userPassword }}">
+                        <input class="userData" id='passField' type="password" name="password" autocomplete="off" placeholder="Новый пароль"
+                            value="">
                         <a href="#" class="password-control" onclick="changePassField()"></a>
                     </div>
 
@@ -187,6 +187,9 @@
                 <input type='submit' class='save' value="Сохранить">
             </div>
         </form>
+        <div class='other_info'>
+            <button class='save' onclick="window.open('/render_claim_pdf');">Печать заявления</button>
+        </div>
     </div>
 </div>
 <script>

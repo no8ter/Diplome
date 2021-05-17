@@ -37,6 +37,7 @@
     input:required:valid {
         border: 1px solid green;
     }
+
     input:required:invalid {
         border: 1px solid lightcoral;
     }
@@ -171,16 +172,17 @@
         margin: 5px;
     }
 
-    div.signs > label {
+    div.signs>label {
         padding: 5px;
         width: max-content;
     }
 
-    div.signs > input[type=checkbox] {
+    div.signs>input[type=checkbox] {
         margin: 0px;
         padding: 0px;
     }
-    div.signs > label > a {
+
+    div.signs>label>a {
         color: green;
         text-decoration: green;
     }
@@ -198,17 +200,19 @@
     <!-- /ERROR -->
     <div class='main_form'>
         <form action="" method="post">
-            
+
             <p style="text-align: center; margin: 1px; font-size: xx-large; font-weight: bold;">Заявление</p>
             <div class='form_namedata'>
                 <!-- Left -->
                 <div class="grid_line">
                     <label for="secondname" class='formLabel'>Фамилия:</label>
-                    <input type="text" name="secondname" autocomplete="off" required placeholder="Иванов" pattern="[А-Я][а-я]*">
+                    <input type="text" name="secondname" autocomplete="off" required placeholder="Иванов"
+                        pattern="[А-Я][а-я]*">
                 </div>
                 <div class="grid_line">
                     <label for="firstname" class='formLabel'>Имя:</label>
-                    <input type="text" name="firstname" autocomplete="off" required placeholder="Иван" pattern="[А-Я][а-я]*">
+                    <input type="text" name="firstname" autocomplete="off" required placeholder="Иван"
+                        pattern="[А-Я][а-я]*">
                 </div>
                 <div class="grid_line">
                     <label for="tridname" class='formLabel'>Отчество:</label>
@@ -235,7 +239,8 @@
                 </div>
                 <div class="grid_line">
                     <label for="passID" class='formLabel'>Серия и номер:</label>
-                    <input type="text" name="passID" autocomplete="off" placeholder="6116999999" required pattern="(\d{10})">
+                    <input type="text" name="passID" autocomplete="off" placeholder="6116999999" required
+                        pattern="(\d{10})">
                 </div>
                 <div class="grid_line">
                     <label for="passDate" class='formLabel'>Когда выдан:</label>
@@ -243,12 +248,13 @@
                 </div>
                 <div class="grid_line">
                     <label for="passCountry" class='formLabel'>Кем выдан:</label>
-                    <input type="text" name="passCountry" autocomplete="off" required placeholder="Отделением №2 отдела УФМС России по Рязанской обл. в г. Рязани">
+                    <input type="text" name="passCountry" autocomplete="off" required
+                        placeholder="Отделением №2 отдела УФМС России по Рязанской обл. в г. Рязани">
                 </div>
             </div>
             <hr style="width: 99%;">
             <div class="mid_grid">
-                
+
                 <!-- Spec -->
                 <div class="line_main">
                     <label for="speciality" class='formLabel'>На специальность:</label>
@@ -268,29 +274,42 @@
                     <label for="schoolDate" class='formLabel'>Год окончания:</label>
                     <input id='pickDate' type="number" min="1900" step="1" name="schoolDate" autocomplete="off"
                         required />
-
                 </div>
                 <div class='line_main'>
                     <label for="schoolAttestate" class='formLabel'>Номер аттестата:</label>
-                    <input type="text" name="schoolAttestate" autocomplete="off" required placeholder="06224003199119" pattern="[0-9]{14}">
+                    <input type="text" name="schoolAttestate" autocomplete="off" required placeholder="06224003199119"
+                        pattern="\d{14}">
+                </div>
+                <div class="line_main">
+                    <label for="attestateAverage" class='formLabel'>Средний балл:</label>
+                    <input type="text" name="attestateAverage" autocomplete="off" required placeholder="4.02"
+                        pattern="[1-4]+(\.\d{1,2})?|5|5.0|5.00">
                 </div>
                 <!-- About me -->
                 <p>О себе:</p>
                 <div class='line_main'>
+                    <label for="mail" class='formLabel'>Эл. почта:</label>
+                    <input type="email" name="mail" autocomplete="off" required placeholder="example@gmail.com" />
+                </div>
+                <div class='line_main'>
                     <label for="passLivePlace" class='formLabel'>Прописан(а):</label>
-                    <input type="text" name="passLivePlace" autocomplete="off" required placeholder="ул. Ленина д.6 к.1 кв.47" />
+                    <input type="text" name="passLivePlace" autocomplete="off" required
+                        placeholder="ул. Ленина д.6 к.1 кв.47" />
                 </div>
                 <div class='line_main'>
                     <label for="currentLivePlace" class='formLabel'>Проживаю:</label>
-                    <input type="text" name="currentLivePlace" autocomplete="off" required placeholder="ул. Ленина д.6 к.1 кв.47" />
+                    <input type="text" name="currentLivePlace" autocomplete="off" required
+                        placeholder="ул. Ленина д.6 к.1 кв.47" />
                 </div>
                 <div class='line_main'>
                     <label for="phoneNumber" class='formLabel'>Номер телефона:</label>
-                    <input type="tel" name="phoneNumber" autocomplete="off" required placeholder="+79991234567" pattern="\+7(\d{10})">
+                    <input type="tel" name="phoneNumber" autocomplete="off" required placeholder="+79991234567"
+                        pattern="\+7(\d{10})">
                 </div>
                 <div class='line_main'>
                     <label for="сommissariat" class='formLabel'>Районный коммисариат:</label>
-                    <input type="text" name="сommissariat" autocomplete="off" placeholder="Военный комиссариат Октябрьского и Советского районов Рязанской области">
+                    <input type="text" name="сommissariat" autocomplete="off"
+                        placeholder="Военный комиссариат Октябрьского и Советского районов Рязанской области">
                 </div>
                 <div class='line_main'>
                     <label for="secondLanguage" class='formLabel'>Иностранный язык:</label>
@@ -299,7 +318,6 @@
                         <option value="french">Французкий язык</option>
                         <option value="german">Немецкий язык</option>
                     </select>
-                    <!-- <input type="text" name="secondLanguage" autocomplete="off"> -->
                 </div>
                 <div class='line_main'>
                     <label for="medicalGroup" class='formLabel'>Группа по здорвью:</label>
@@ -309,7 +327,6 @@
                         <option value="specA">Специальная А</option>
                         <option value="specB">Специальная Б</option>
                     </select>
-                    <!-- <input type="text" name="medicalGroup" autocomplete="off"> -->
                 </div>
                 <div class='line_main'>
                     <label for="needHostel" class='formLabel'>Потребность в общежитии:</label>
@@ -317,7 +334,6 @@
                         <option value="False">Не нуждаюсь</option>
                         <option value="True">Нуждаюсь</option>
                     </select>
-                    <!-- <input type="text" name="needHostel" autocomplete="off"> -->
                 </div>
                 <!-- Parents -->
                 <p>О родителях:</p>
@@ -327,7 +343,8 @@
                 </div>
                 <div class='line_main'>
                     <label for="motherPhone" class='formLabel'>Телефон матери:</label>
-                    <input type="tel" name="motherPhone" autocomplete="off" placeholder="+79991234567" pattern="\+7(\d{10})">
+                    <input type="tel" name="motherPhone" autocomplete="off" placeholder="+79991234567"
+                        pattern="\+7(\d{10})">
                 </div>
                 <div class='line_main'>
                     <label for="fatherName" class='formLabel'>Фио отца:</label>
@@ -335,7 +352,8 @@
                 </div>
                 <div class='line_main'>
                     <label for="fatherPhone" class='formLabel'>Телефон отца:</label>
-                    <input type="tel" name="fatherPhone" autocomplete="off" placeholder="+79991234567" pattern="\+7(\d{10})">
+                    <input type="tel" name="fatherPhone" autocomplete="off" placeholder="+79991234567"
+                        pattern="\+7(\d{10})">
                 </div>
                 <!-- Signs -->
                 <div class='signs'>
@@ -344,15 +362,24 @@
                     <input type="checkbox" name="specEducationFirstTime" value="True" required>
                 </div>
                 <div class='signs'>
-                    <label for="specLicense">С <a href="http://polytech-rzn.ru/metal/wp-content/uploads/2021/02/%D0%A3%D1%81%D1%82%D0%B0%D0%B2-1.pdf">копиями устава</a>, <a href="http://polytech-rzn.ru/metal/wp-content/uploads/2021/01/4.-%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F-%D0%9E%D0%93%D0%91%D0%9F%D0%9E%D0%A3-%D0%A0%D0%9F%D0%A2%D0%9A.pdf">лицензии на ведение образовательной деятельности</a>, <a href="http://polytech-rzn.ru/metal/wp-content/uploads/2021/01/8.-%D0%A1%D0%B2%D0%B8%D0%B4%D0%B5%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%BE-%D0%BE-%D0%B3%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9-%D0%B0%D0%BA%D0%BA%D1%80%D0%B5%D0%B4%D0%B8%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%9E%D0%93%D0%91%D0%9F%D0%9E%D0%A3-%D0%A0%D0%9F%D0%A2%D0%9A.pdf">свидетельством о государственной аккредетации</a> и приложениями к нему ознакомлен(а)</label>
+                    <label for="specLicense">С <a
+                            href="http://polytech-rzn.ru/metal/wp-content/uploads/2021/02/%D0%A3%D1%81%D1%82%D0%B0%D0%B2-1.pdf">копиями
+                            устава</a>, <a
+                            href="http://polytech-rzn.ru/metal/wp-content/uploads/2021/01/4.-%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F-%D0%9E%D0%93%D0%91%D0%9F%D0%9E%D0%A3-%D0%A0%D0%9F%D0%A2%D0%9A.pdf">лицензии
+                            на ведение образовательной деятельности</a>, <a
+                            href="http://polytech-rzn.ru/metal/wp-content/uploads/2021/01/8.-%D0%A1%D0%B2%D0%B8%D0%B4%D0%B5%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%BE-%D0%BE-%D0%B3%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9-%D0%B0%D0%BA%D0%BA%D1%80%D0%B5%D0%B4%D0%B8%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D0%9E%D0%93%D0%91%D0%9F%D0%9E%D0%A3-%D0%A0%D0%9F%D0%A2%D0%9A.pdf">свидетельством
+                            о государственной аккредетации</a> и приложениями к нему ознакомлен(а)</label>
                     <input type="checkbox" name="specLicense" value="True" required>
                 </div>
                 <div class='signs'>
-                    <label for="specOriginalDocs">С <a href="http://polytech-rzn.ru/metal/wp-content/uploads/2014/07/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0-%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%D0%B0.pdf">датой предоставления оригинала документов об образовании</a> ознакомлен(а)</label>
+                    <label for="specOriginalDocs">С <a
+                            href="http://polytech-rzn.ru/metal/wp-content/uploads/2014/07/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0-%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%D0%B0.pdf">датой
+                            предоставления оригинала документов об образовании</a> ознакомлен(а)</label>
                     <input type="checkbox" name="specOriginalDocs" value="True" required>
                 </div>
                 <div class='signs'>
-                    <label for="specPersonalData">Согласен на обраоботку своих персональных данных в порядке ФЗ №152-ФЗ</label>
+                    <label for="specPersonalData">Согласен на обраоботку своих персональных данных в порядке ФЗ
+                        №152-ФЗ</label>
                     <input type="checkbox" name="specPersonalData" value="True" required>
                 </div>
             </div>
