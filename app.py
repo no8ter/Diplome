@@ -1,13 +1,21 @@
+########################################################
+#                                                      #
+#  Рудовский Станислав Федорович г. Рязань 2021 г.     #
+#                                                      #
+#  Программа "Приёмная комиссия для РПТК"              #
+#                                                      #
+########################################################
+
 import datetime
+import os
 import random
 import sqlite3
 import string
-import os
-from flask.helpers import send_from_directory
 
 import pytils
 from flask import Flask, redirect, render_template, request, url_for
 from flask.globals import session
+from flask.helpers import send_from_directory
 from flask_bcrypt import Bcrypt
 
 from config import *
@@ -16,23 +24,11 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
 # settings
-app.debug = True
+
 app.permanent_session_lifetime = datetime.timedelta(hours=1)
 app.secret_key = SECURE_KEY
 
-# legacy
-
-# import pdfkit
-
-
-# def HTMLtoPDF(way: str = "<html><head></head><body><b>Hello, world!</b></body></html>", endname: str = "out.pdf", path_wkhtmltopdf: str = r'\static\wkhtmltopdf\bin\wkhtmltopdf.exe'):
-#     '''
-#     Преобразование HTML-строки в PDF
-#     '''
-#     config = pdfkit.configuration(wkhtmltopdf=os.getcwd()+path_wkhtmltopdf)
-#     pdfkit.from_string(way, endname, configuration=config)
-
-# /legacy
+# /settings
 
 # utilities
 
@@ -45,6 +41,7 @@ def _c(f) -> list:
     for i in f:
         r.append(i)
     return r
+
 
 def req(sql: str, needCommit: bool = True) -> list:
     '''
@@ -76,14 +73,16 @@ def auth_request() -> bool:
         return False
 
 
-def renderDocxTemplate(userLogin:str):
+def renderDocxTemplate(userLogin: str):
     '''
     Заполнение шаблонного заявление о конкретном пользователе
     '''
-    from docxtpl import DocxTemplate
     from docx2pdf import convert
+    from docxtpl import DocxTemplate
+
     def _check(a):
         return '' if a == None else a
+
     def _cHealth(a):
         if a == 'main':
             return 'основная'
@@ -95,6 +94,7 @@ def renderDocxTemplate(userLogin:str):
             return 'специальная Б'
         else:
             return ''
+
     def _cLang(a):
         if a == 'english':
             return 'английский'
@@ -106,25 +106,25 @@ def renderDocxTemplate(userLogin:str):
             return ''
         ...
     uID = getUserData(userLogin, 'users.id')[0]
-    data = getUserData(userLogin, 'claims.marksAverage','abiturients.fname', 'abiturients.sname', 'abiturients.tname',
-                                'abiturients.birthday', 'abiturients.birthplace', 'abiturients.country',
-                                'passports.serial', 'passports.number', 'passports.creator', 'passports.date',
-                                'claims.spec_id', 'claims.endDate', 'claims.schoolName', 'claims.attestate',
-                                'claims.passPlace', 'claims.livePlace', 'claims.phone', 'users.email', 'claims.army',
-                                'claims.lang', 'claims.healthGroup', 'claims.needHostel', 'claims.motherName',
-                                'claims.motherPhone', 'claims.fatherName', 'claims.fatherPhone')
+    data = getUserData(userLogin, 'claims.marksAverage', 'abiturients.fname', 'abiturients.sname', 'abiturients.tname',
+                       'abiturients.birthday', 'abiturients.birthplace', 'abiturients.country',
+                       'passports.serial', 'passports.number', 'passports.creator', 'passports.date',
+                       'claims.spec_id', 'claims.endDate', 'claims.schoolName', 'claims.attestate',
+                       'claims.passPlace', 'claims.livePlace', 'claims.phone', 'users.email', 'claims.army',
+                       'claims.lang', 'claims.healthGroup', 'claims.needHostel', 'claims.motherName',
+                       'claims.motherPhone', 'claims.fatherName', 'claims.fatherPhone')
 
     doc = DocxTemplate("static\\Заявление-шаблон.docx")
     specName = req(f'select name from profs where rowid = {data[11]}')[0][0]
-    context = { 'avg': data[0], 'fname': data[1], 'sname': data[2], 'tname': data[3], 
-                'birthday': data[4], 'birthplace': data[5], 'country': data[6],
-                'serial': data[7], 'number': data[8], 'creator': data[9], 'date': data[10],
-                'profName': specName, 'schoolDate': data[12], 'schoolName': data[13],
-                'attestate': data[14], 'passPlace': data[15], 'livePlace': data[16],
-                'phone': data[17], 'email': _check(data[18]), 'army': _check(data[19]),
-                'lang': _cLang(data[20]), 'healthGroup': _cHealth(data[21]), 
-                'needHostel': 'нуждаюсь' if data[22] else 'не нуждаюсь',
-                'momName': data[23], 'momPhone': data[24], 'dadName': data[25], 'dadPhone': data[26]}
+    context = {'avg': data[0], 'fname': data[1], 'sname': data[2], 'tname': data[3],
+               'birthday': data[4], 'birthplace': data[5], 'country': data[6],
+               'serial': data[7], 'number': data[8], 'creator': data[9], 'date': data[10],
+               'profName': specName, 'schoolDate': data[12], 'schoolName': data[13],
+               'attestate': data[14], 'passPlace': data[15], 'livePlace': data[16],
+               'phone': data[17], 'email': _check(data[18]), 'army': _check(data[19]),
+               'lang': _cLang(data[20]), 'healthGroup': _cHealth(data[21]),
+               'needHostel': 'нуждаюсь' if data[22] else 'не нуждаюсь',
+               'momName': data[23], 'momPhone': data[24], 'dadName': data[25], 'dadPhone': data[26]}
     doc.render(context)
     s = 'static\\'
     name = f"Заявление-{userLogin}-{uID}"
@@ -278,17 +278,35 @@ def saveFormData(form):
 
 
 def sendLoginPass(log, paw):
+    '''
+    Отправка логина и пароля (заглушка)
+    '''
     print(log, paw)
+
+
+def check_admin_pass(pwd):
+    '''
+    Проверка пароля администратора
+    '''
+    return pwd in ADMINS
+
+# /utilities
 
 
 # routing
 
-@app.route('/new_password/<int:uid>')
-def new_password(uid):
-    data = genNewUserPass()
-    sql = f"""UPDATE `users` SET `password` = "{data['hash']}" where `id` = {uid} """
-    req(sql)
-    return f" {data['password']} - {data['hash']}"
+@app.route('/new_password/<adm_pass>/<userID>')
+def new_password(adm_pass, userID):
+    '''
+    Создание нового пароля пользователя
+    '''
+    if check_admin_pass(adm_pass):
+        data = genNewUserPass()
+        sql = f"""UPDATE `users` SET `password` = "{data['hash']}" where `id` = {userID} """
+        req(sql)
+        return f"Новый пароль у {userID}: {data['password']} - {data['hash']}"
+    else:
+        return redirect(url_for(404))
 
 
 @app.route('/render_claim_pdf')
@@ -300,14 +318,14 @@ def render_claim_pdf():
 
         import pythoncom
         pythoncom.CoInitializeEx(0)
-    
+
         name = renderDocxTemplate(session.get('userLogin'))
         waybase = os.getcwd()+'\\static'
         temp = send_from_directory(waybase, name)
         return temp
     else:
         return redirect(url_for('login'))
-     
+
 
 @app.route('/login', methods=['post', 'get'])
 def login():
@@ -331,11 +349,17 @@ def login():
 
 @app.errorhandler(404)
 def page_not_found(e):
+    '''
+    Маршрутизация страницы 404
+    '''
     return render_template('layout.html'), 404
 
 
 @app.route('/cabinet')
 def cabinet():
+    '''
+    Переадресация из кабинета в профиль пользователя (рудимент)
+    '''
     return redirect(url_for('profile'))
 
 
@@ -379,6 +403,9 @@ def claim_success(p=None, l=None, ps=None):
 
 @app.route('/profile', methods=['post', 'get'])
 def profile():
+    '''
+    Маршрутизация в профиль пользователя
+    '''
     if auth_request():
         if request.method == 'POST':
             print(request.form)
@@ -415,6 +442,9 @@ def profile():
 
 @app.route('/logout')
 def logout():
+    '''
+    Маршрутизация для выход из пользователя
+    '''
     try:
         session.clear()
         return redirect(url_for('index'))
@@ -424,6 +454,9 @@ def logout():
 
 @app.route('/ratings')
 def ratings():
+    '''
+    Маршрутизация для отображения рейтингов пользователей
+    '''
     rating = ENABLE_RATINGS
     if rating:
         temp = req("select profs.spec_id, profs.name, abiturients.fname, abiturients.sname, claims.marksAverage, claims.abitID from profs join claims on claims.spec_id=profs.rowid join abiturients on claims.abitID=abiturients.id order by profs.spec_id, claims.marksAverage desc ", False)
@@ -442,6 +475,9 @@ def ratings():
 
 @app.route('/professions/')
 def professions():
+    '''
+    Маршрутизация для отображения профессий
+    '''
     data = req(
         "Select rowid, `spec_id`, `name`, `spec_data`, `legend`, `photoWay` From `profs` order by `spec_id`", False)
     return render_template('professions.html', profs=data)
@@ -449,6 +485,9 @@ def professions():
 
 @app.route('/professions/<int:id>')
 def showProf(id):
+    '''
+    Маршрутизация для отображения конкретной профессии
+    '''
     data = req(
         f" Select rowid, `spec_id`, `name`, `spec_data`, `legend`, `photoWay` From `profs` Where rowid = '{id}'", False)[0]
     return render_template('profPage.html', info=data, profID=id)
@@ -456,12 +495,17 @@ def showProf(id):
 
 @app.route('/')
 def index():
+    '''
+    Маршрутизация корневой страницы
+    '''
     if auth_request():
         return redirect(url_for('profile'))
     else:
         return redirect(url_for('claim'))
 
+# /routing
+
 
 if __name__ == "__main__":
-    # app.run()
+    app.debug = True
     app.run(host='0.0.0.0', port=80)
