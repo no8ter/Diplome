@@ -202,6 +202,17 @@
         <form action="" method="post">
 
             <p style="text-align: center; margin: 1px; font-size: xx-large; font-weight: bold;">Заявление</p>
+            <p style="margin-left:10px;">Прошу допустить меня к участию в конкурсе</p>
+            <!-- Spec -->
+            <div class="line_main">
+                <label for="speciality" class='formLabel'>На специальность:</label>
+                <select name="specialitySelect" id="spec1">
+                    {% for spec in species %}
+                    <option value="{{ spec[0] }}">{{ spec[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <hr style="width: 99%;">
             <div class='form_namedata'>
                 <!-- Left -->
                 <div class="grid_line">
@@ -255,15 +266,6 @@
             <hr style="width: 99%;">
             <div class="mid_grid">
 
-                <!-- Spec -->
-                <div class="line_main">
-                    <label for="speciality" class='formLabel'>На специальность:</label>
-                    <select name="specialitySelect" id="spec1">
-                        {% for spec in species %}
-                        <option value="{{ spec[0] }}">{{ spec[1] }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
                 <!-- School -->
                 <p>Окончил(а) учебное заведение:</p>
                 <div class='line_main'>
