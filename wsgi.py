@@ -5,5 +5,5 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         waitress.serve(app.app, host=sys.argv[1], port=80)
     else:
-        waitress.serve(app.app, host='localhost', port=80)
+        waitress.serve(app.app, port=80)
     print('Shutdown server')
