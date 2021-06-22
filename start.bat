@@ -7,5 +7,5 @@ IF NOT EXIST "venv\Scripts\pip.exe" (
 	echo venv exists already.
 )
 
-"venv\Scripts\python.exe" wsgi.py
+"venv\Scripts\python.exe" wsgi.py 0.0.0.0
 exit
